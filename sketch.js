@@ -4,6 +4,7 @@ let unlocked = true;
 var startButton;
 let loopStart;
 let loopStart1;
+let amp;
 
 function preload(){
 	audio = loadSound('data/English.mp3');
@@ -36,6 +37,11 @@ function setup() {
 	// let stopButton = createButton("stop");
 	// stopButton.position(width/2 + 20, height/2);
 	// stopButton.mousePressed(stop);
+
+	amp = new p5.Amplitude();
+
+	console.log('loopStart is: ' + loopStart);
+	console.log('loopStart1 is: ' + loopStart1);
 }
 
 function start(){
@@ -53,8 +59,8 @@ function start(){
 		loopStart = random(.9, 1.02);
 		loopStart1 = random(.9, 1.02);
 		unlocked = true;
-		console.log('loopStart is: ' + loopStart);
-		console.log('loopStart1 is: ' + loopStart1);
+		// console.log('loopStart is: ' + loopStart);
+		// console.log('loopStart1 is: ' + loopStart1);
 	}
 
 }
@@ -71,16 +77,18 @@ function draw() {
 
 	//rgb(253, 138, 138) for text
 
+	let vol = map(amp.getLevel(), 0, 1, 0, 75);
+	let vol1 = map(amp.getLevel(1), 0, 1, 0, 75);
+
 	//stroke(84, 22, 144);
 	stroke(241, 247, 181);
 	let x1 = map(audio.currentTime(), 0, audio.duration(), 0, width);
-	line(x1, height/2 - height/4, x1, (height/2 - height/4) + height/2);
+	line(x1, height/2 - height/4 - vol, x1, ((height/2 - height/4) + height/2) + vol);
 
 	let x2 = map(audio1.currentTime(), 0, audio1.duration(), 0, width);
-	line(x2, height/2 - height/4, x2, (height/2 - height/4) + height/2);
+	line(x2, height/2 - height/4 - vol1, x2, ((height/2 - height/4) + height/2) + vol1);
 
 	let peaks = audio.getPeaks(64);
-
 
 	push();
 	for (let i = 0; i < peaks.length; i++){
