@@ -30,8 +30,9 @@ function setup() {
 	}
 
 	startButton = createButton("play");
-	startButton.position(width/2, height/2);
+	//startButton.position(width/2, height/2);
 	startButton.mousePressed(start);
+	startButton.center();
 	// let stopButton = createButton("stop");
 	// stopButton.position(width/2 + 20, height/2);
 	// stopButton.mousePressed(stop);
